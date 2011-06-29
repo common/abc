@@ -1,0 +1,15 @@
+keytool -genkey -alias server -keyalg RSA  -validity 3650 -dname "cn=localhost,o=\"ABC Co.,Ltd\",l=Pudong,st=Shanghai,c=CN" -keypass password -keystore server.jks -storepass password
+
+keytool -export -alias server -file server.crt -keystore server.jks -storepass password
+
+keytool -import -alias server -file server.crt -keystore "%JAVA_HOME%/JRE/LIB/SECURITY/CACERTS" -storepass changeit
+keytool -import -alias server -file server.crt -keystore "/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/lib/security/cacerts" -storepass changeit
+
+keytool -list -v -alias server -keystore "%JAVA_HOME%/JRE/LIB/SECURITY/CACERTS" -storepass changeit
+keytool -list -v -alias server -keystore "/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/lib/security/cacerts" -storepass changeit
+
+keytool -delete -alias server -keystore "%JAVA_HOME%/JRE/LIB/SECURITY/CACERTS" -storepass changeit
+keytool -delete -alias server -keystore "/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home/lib/security/cacerts" -storepass changeit
+
+
+

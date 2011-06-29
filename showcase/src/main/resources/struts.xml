@@ -1,0 +1,66 @@
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.objectFactory" value="spring"/>
+    <constant name="struts.convention.action.packages" value="com.github.abc.showcase.web"/>
+    <constant name="struts.convention.default.parent.package" value="abc-default"/>
+    <constant name="struts.custom.i18n.resources"
+              value="i18n/validation,i18n/constants"/>
+    <constant name="struts.action.extension" value="json,,"/>
+    <constant name="struts.action.excludePattern" value="/,/static/.*"/>
+    <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.devMode" value="false"/>
+
+    <package name="abc-default" extends="convention-default">
+        <interceptors>
+            <interceptor-stack name="globalStack">
+                <interceptor-ref name="exception">
+                    <param name="logEnabled">true</param>
+                    <param name="logLevel">error</param>
+                </interceptor-ref>
+                <interceptor-ref name="alias"/>
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="chain"/>
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+                <interceptor-ref name="params">
+                    <param name="excludeParams">dojo\..*,^struts\..*</param>
+                </interceptor-ref>
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref>
+            </interceptor-stack>
+        </interceptors>
+
+        <default-interceptor-ref name="globalStack"/>
+        <!--<default-action-ref name="index"/>-->
+
+<!--
+        <global-results>
+            <result name="exception">/exception.jsp</result>
+        </global-results>
+
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="exception"/>
+        </global-exception-mappings>
+-->
+
+        <!--<action name="index">-->
+        <!--<result>/index.jsp</result>-->
+        <!--</action>-->
+    </package>
+</struts>
