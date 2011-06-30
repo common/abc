@@ -17,7 +17,7 @@
 
         <security:intercept-url pattern="/**" access="ROLE_ADMIN"/>
         <security:logout
-                logout-success-url="https://localhost:446/accounts/logout?redirectTo=http://localhost:8080/showcase/"
+                logout-success-url="http://localhost:8088/accounts/logout?redirectTo=http://localhost:8080/showcase/"
                 invalidate-session="true"/>
         <security:anonymous/>
 
@@ -34,7 +34,7 @@
     <!-- cas验证切入点 -->
     <bean id="casProcessingFilterEntryPoint" class="org.springframework.security.cas.web.CasAuthenticationEntryPoint">
         <property name="loginUrl"
-            value="https://localhost:446/accounts/login" />
+            value="http://localhost:8088/accounts/login" />
         <property name="serviceProperties" ref="serviceProperties" />
     </bean>
 
@@ -46,23 +46,22 @@
         <property name="filterProcessesUrl" value="/j_spring_cas_security_check" />
         <property name="authenticationFailureHandler" ref="authenticationFailureHandler" />
         <!--<property name="authenticationFailureUrl"-->
-            <!--value="https://localhost:446/accounts/login" />-->
+            <!--value="http://localhost:8088/accounts/login" />-->
         <!--<property name="defaultTargetUrl" value="/index.jsp" />-->
     </bean>
 
     <bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
         <property name="defaultFailureUrl"
-            value="https://localhost:446/accounts/login" />
+            value="http://localhost:8088/accounts/login" />
     </bean>
 
     <!-- cas 验证器  -->
     <bean id="casAuthenticationProvider" class="org.springframework.security.cas.authentication.CasAuthenticationProvider">
-        <!-- 向内置的验证 器管理Bean中注册cas验证器 -->
         <property name="authenticationUserDetailsService" ref="authenticationUserDetailsService" />
         <property name="serviceProperties" ref="serviceProperties" />
         <property name="ticketValidator">
             <bean class="org.jasig.cas.client.validation.Cas20ServiceTicketValidator">
-                <constructor-arg index="0" value="https://localhost:446/accounts"/>
+                <constructor-arg index="0" value="http://localhost:8088/accounts"/>
             </bean>
         </property>
         <property name="key" value="abc" />

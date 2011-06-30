@@ -157,6 +157,11 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <configuration>
                     <contextPath>accounts</contextPath>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>8088</port>
+                        </connector>
+                    </connectors>
                 </configuration>
             </plugin>
         </plugins>
